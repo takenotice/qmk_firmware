@@ -65,21 +65,21 @@ KC_CAPS,      KC_TAB,    KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,
    * `------------------------------------------------------------------------------------------'
    */
     [_LOWER] = LAYOUT(
-              RGB_TOG,  KC_TRNS,  KC_TRNS,  KC_TRNS,  RGB_SAD,  RGB_HUD,  RGB_HUI,  RGB_SAI,  KC_TRNS,  KC_TRNS,  RGB_VAD,  RGB_VAI,
-              KC_GRAVE, KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS, KC_EQUAL,
-KC_NLCK,      KC_TRNS,  KC_TRNS,  KC_UP,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_LBRC,  KC_RBRC,  KC_BSLS, 
-    KC_HOME,  KC_TRNS,  KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
-    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
-    KC_END,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_PSCR
+                 RGB_TOG,  KC_TRNS,  KC_TRNS,  KC_TRNS,  RGB_SAD,  RGB_HUD,  RGB_HUI,  RGB_SAI,  KC_TRNS,  KC_TRNS,  RGB_VAD,  RGB_VAI,
+                 KC_GRAVE, KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS, KC_EQUAL,
+KC_AUDIO_MUTE,   KC_TRNS,  KC_TRNS,  KC_UP,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_LBRC,  KC_RBRC,  KC_BSLS, 
+    KC_HOME,     KC_TRNS,  KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
+    KC_TRNS,     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
+    KC_END,      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_PSCR
   )
 };
 
 void encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         if (clockwise) {
-            tap_code(KC_WH_L);
+            tap_code(KC_AUDIO_VOL_UP);
         } else {
-            tap_code(KC_WH_R);
+            tap_code(KC_AUDIO_VOL_DOWN);
         }
     }
 }
