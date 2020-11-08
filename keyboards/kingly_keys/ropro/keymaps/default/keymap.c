@@ -17,131 +17,61 @@
 #include QMK_KEYBOARD_H
 
 enum layer_names {
-    COMK,
-    GAME,
-    SYMB,
-    MDIA
+    _BASE,
+    _LOWER
 };
 
-#define _MD_A LT(MDIA, KC_A)
-#define _MD_SCN LT(MDIA, KC_SCLN)
-#define _MD_O LT(MDIA, KC_O)
-#define _SY_GRV LT(SYMB,KC_GRV)
-#define _CTL_Z CTL_T(KC_Z)
-#define _MD_MO MO(MDIA)
-#define _SY_SPC LT(SYMB, KC_SPC)
-#define _SY_N LT(SYMB, KC_N)
-#define _SY_J LT(SYMB, KC_J)
-#define _SY_MO MO(SYMB)
-#define _META ALL_T(KC_NO)
-#define _MEH MEH_T(KC_NO)
-#define _CTL_SL CTL_T(KC_SLSH)
-#define _WN_QOT GUI_T(KC_QUOT)
-#define _RSH_EN RSFT_T(KC_ENT)
-#define _TAP_SY TT(SYMB)
-#define _D_MDIA DF(MDIA)
-#define _D_COMK DF(COMK)
-#define _TG_GAM TG(GAME)
+#define LOWER MO(_LOWER)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    /* Keymap 0: Colemak Layer
-   *        ,-----------------------------------------------------------------------------------.
-   *        |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |
-   *        |------+------+------+------+------+------+------+------+------+------+------+------|
-   *        |   =  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |   -  |
-   *        |------+------+------+------+------+------+------+------+------+------+------+------|
-   *  RotEn | Del  |   Q  |   W  |   F  |   P  |   B  |   J  |   L  |   U  |   Y  |   ;  |   \  |
-   * ,------|------+------+------+------+------+------+------+------+------+------+------+------|
-   * | Hyper| Bksp |A/MDIA|   R  |   S  |   T  |   G  |   M  |N/SYMB|   E  |   I  |O/MDIA|   "  |
-   * |------|------+------+------+------+------+------+------+------+------+------+------+------|
-   * |  Meh | Shift|Z/Ctrl|   X  |   C  |   D  |   V  |   K  |   H  |   ,  |   .  |//Ctrl|Sh/Ent|
-   * |------|------+------+------+------+------+------+------+------+------+------+------+------|
-   * |  GUI |Grv/SY|  ESC | MDIA |  Alt |  Tab |    Space    | Left | Down |  Up  | Right|TapSYM|
-   * `------------------------------------------------------------------------------------------'
-   */
-  	[COMK] = LAYOUT(
-              KC_F1,     KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,    KC_F11,    KC_F12,
-              KC_EQL,    KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,      KC_0,      KC_MINUS,
-    KC_NO,    KC_DEL,    KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,     KC_J,     KC_L,     KC_U,     KC_Y,      KC_SCLN,   KC_BSLS,
-    _META,    KC_BSPC,   _MD_A,    KC_R,     KC_S,     KC_T,     KC_G,     KC_M,     _SY_N,    KC_E,     KC_I,      _MD_O,     _WN_QOT,
-    _MEH,     KC_LSFT,   _CTL_Z,   KC_X,     KC_C,     KC_D,     KC_V,     KC_K,     KC_H,     KC_COMM,  KC_DOT,    _CTL_SL,   _RSH_EN,
-    KC_GUI,   _SY_GRV,   KC_ESC,   _MD_MO,   KC_LALT,  KC_TAB,   KC_SPC,   KC_SPC,   KC_LEFT,  KC_DOWN,  KC_UP,     KC_RGHT,   _TAP_SY
-  ),
-
-  /* Keymap 1: Game / QWERTY Layer
+  /* BASE
    *        ,-----------------------------------------------------------------------------------.
    *        |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10  | F11 |  F12 |
-   *        |------+------+------+------+------+------+------+------+------+------+------+------|
+   *        |------+------+------+------+------+-------------+------+------+------+------+------|
    *        | Esc  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |   -  |
-   *        |------+------+------+------+------+------+------+------+------+------+------+------|
+   *        |+------+------+------+------+-----+------+------+------+------+------+------+------|
    *  RotEn | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
    * ,------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * | Hyper| Ctrl |A/MDIA|   S  |   D  |   F  |   G  |   H  |J/SYMB|   K  |   L  |;/MDIA|'/GUI |
-   * |------|------+------+------+------+------+------+------+------+------+------+------+------|
-   * |  Meh | Shift|Z/MDIA|   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |//Ctrl|Sh/Ent|
-   * |------|------+------+------+------+------+------+------+------+------+------+------+------|
-   * |  GUI | Del  | Ctrl | GUI  | ALT  |Lower |SPACE |SPACE | End  | Left | Down |  Up  |Right |
+   * | PgUp | Ctrl |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  "   |
+   * |------+------+------+------+------+------+-------------+------+------+------+------+------|
+   * | Lower| Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
+   * |------+------+------+------+------+------+------+------+------+------+------+------+------|
+   * | PgDn | Del  | Ctrl | GUI  | ALT  |Lower |SPACE |SPACE | End  | Left | Down |  Up  |Right |
    * `------------------------------------------------------------------------------------------'
    */
-  	[GAME] = LAYOUT(
+  	[_BASE] = LAYOUT(
               KC_F1,     KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,    KC_F11,    KC_F12,
-              KC_ESC,    KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,      KC_0,      KC_MINUS,
-    KC_NO,    KC_TAB,    KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,      KC_P,      KC_BSPC,   
-    _META,    KC_BSPC,   _MD_A,    KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     _SY_J,    KC_K,     KC_L,      _MD_SCN,   _WN_QOT,
-    _MEH,     KC_LSFT,   _CTL_Z,   KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,    _CTL_SL,   _RSH_EN,
-    KC_GUI,   _SY_GRV,   KC_ESC,   _MD_MO,   KC_LALT,  KC_TAB,   KC_SPC,   KC_SPC,   KC_LEFT,  KC_DOWN,  KC_UP,     KC_RGHT,   _TAP_SY
+              KC_ESC,    KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,      KC_0,    KC_MINUS,
+    KC_NO,    KC_TAB,    KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,      KC_P,     KC_BSPC,   
+    KC_PGUP,  KC_LCTRL,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,      KC_SCLN,  KC_QUOT,
+    KC_HOME,  KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,    KC_SLSH,   KC_ENT,
+    KC_PGDN,  KC_DEL,    KC_RCTRL, KC_LGUI,  KC_LALT,  LOWER,    KC_SPC,   KC_SPC,   KC_END,   KC_LEFT,  KC_DOWN,   KC_UP,    KC_RGHT
   ),
 
-  /* Keymap 2: Symbol Layer
-   *
+  /* LOWER
    *        ,-----------------------------------------------------------------------------------.
-   *        |      |      |      |      |      |      |      |      |      |      |      |      |
-   *        |------+------+------+------+------+------+------+------+------+------+------+------|
-   *        |      |      |      |      |      |      |      |      |      |      |      |      |
-   *        |------+------+------+------+------+------+------+------+------+------+------+------|
-   *        |      |   !  |   @  |   {  |   }  |   |  |      |   7  |   8  |   9  |   *  |      |
-   * ,------|------+------+------+------+------+------+------+------+------+------+------+------|
-   * |      |      |   #  |   $  |   (  |   )  |   `  |      |   4  |   5  |   6  |   +  |      |
-   * |------|------+------+------+------+------+------+------+------+------+------+------+------|
-   * |      |      |   %  |   ^  |   [  |   ]  |   ~  |   &  |   1  |   2  |   3  |   \  |      | 
-   * |------|------+------+------+------+------+------+------+------+------+------+------+------|
-   * |      |      |      |      |      |      |      |      |   0  |   0  |   .  |   =  |      |
-   * `------------------------------------------------------------------------------------------'
-   */
-    [SYMB] = LAYOUT(
-              KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,   KC_TRNS,
-              KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,   KC_TRNS,
-              KC_EXLM,   KC_AT,    KC_LCBR,  KC_RCBR,  KC_PIPE,  KC_TRNS,  _TG_GAM,  KC_TRNS,  KC_7,     KC_8,      KC_9,      KC_ASTR, KC_F12,
-    KC_TRNS,  KC_HASH,   KC_DLR,   KC_LPRN,  KC_RPRN,  KC_GRV,   XXXXXXX,  XXXXXXX,  KC_TRNS,  KC_4,     KC_5,      KC_6,      KC_PLUS, KC_TRNS,
-    KC_TRNS,  KC_PERC,   KC_CIRC,  KC_LBRC,  KC_RBRC,  KC_TILD,  KC_TRNS,  KC_TRNS,  KC_AMPR,  KC_1,     KC_2,      KC_3,      KC_BSLS, KC_TRNS,
-    KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  XXXXXXX,  KC_TRNS,  XXXXXXX,  KC_0,     KC_0,      KC_DOT,    KC_EQL,  KC_TRNS
-),
-
-  /* Keymap 3: Media Layer
-   *        ,-----------------------------------------------------------------------------------.
-   *        |      |      |      |      |      |      |      |      |      |      |      |      |
+   *        |TOGRGB|      |      |      |Sat(-)|Hue(-)|Hue(+)|Sat(+)|      |      |Brght-|Brght+|
    *        |------+------+------+------+------+-------------+------+------+------+------+------|
-   *        |      |      |      |      |      |      |      |      |      |      |      |      |
-   *        |------+------+------+------+------+------+------+------+------+------+------+------|
-   *  RotEn |      |MsWhL |MsWhUp| MsUp |MsWhDn|MsWhR | PgUp | Home |      | End  | PrtSc|      |
-   * ,------|------+------+------+------+------+------+------+------+------+------+------+------|
-   * |      | Caps |      |MsLeft|MsDown|MsRght|      | Left | Down |  Up  | Right|      | Play |
-   * |------|------+------+------+------+------+-------------+------+------+------+------+------|
-   * |      |      |MsBtn4| CALC |MsBtn5|      |      | PgDn | Mute | Prev | Next | Ins  |      |
-   * |------|------+------+------+------+------+------+------+------+------+------+------+------|
-   * | EEPRM| Reset|      | Lclk | Rclk |      |      |      |      | VolDn| VolUp|      |      |
+   *        |  `   |      |      |      |      |      |      |      |      |      |      |   =  |
+   *        |+------+------+------+------+-----+------+------+------+------+------+------+------|
+   *  RotEn |      |      |  Up  |      |      |      |      |      |      |   [  |   ]  |   \  |
+   * ,------+------+------+------+------+------+------+------+------+------+------+------+------|
+   * | Home |      | Left | Down |Right |      |      |      |      |      |      |      |      |
+   * |------+------+------+------+------+------+-------------+------+------+------+------+------|
+   * |      |      |      |      |      |      |      |      |      |      |      |      |      |
+   * |------+------+------+------+------+------+------+------+------+------+------+------+------|
+   * | End  |      |      |      |      |      |      |      |      |      |      |      |PrScn |
    * `------------------------------------------------------------------------------------------'
    */
-    [MDIA] = LAYOUT(
-              KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,   KC_TRNS,
-              KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,   KC_TRNS,
-    KC_TRNS, KC_F21,  KC_F22,  KC_F13,  KC_F14,  KC_F15,  _D_QRTY, _D_COMK, KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20,  _TG_GAM,
-    KC_TRNS, KC_WH_L, KC_WH_U, KC_MS_U, KC_WH_D, KC_WH_R, _D_TMK1, _D_TMK2, KC_PGUP, KC_HOME, KC_TRNS, KC_END,  KC_PSCR, KC_TRNS,
-    KC_CAPS, KC_TRNS, KC_MS_L, KC_MS_D, KC_MS_R, KC_TRNS, XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_TRNS, KC_MPLY,
-    KC_TRNS, KC_TRNS, KC_BTN4, KC_CALC, KC_BTN5, KC_TRNS, _D_TMK3, _D_TMK4, KC_PGDN, KC_MUTE, KC_MPRV, KC_MNXT, KC_INS,  KC_TRNS,
-    EEP_RST, RESET,   KC_TRNS, KC_BTN1, KC_BTN2, KC_TRNS, XXXXXXX, KC_TRNS, XXXXXXX, KC_TRNS, KC_VOLD, KC_VOLU, KC_TRNS, KC_TRNS
-    )
+    [_LOWER] = LAYOUT(
+              RGB_TOG,  KC_TRNS,  KC_TRNS,  KC_TRNS,  RGB_SAD,  RGB_HUD,  RGB_HUI,  RGB_SAI,  KC_TRNS,  KC_TRNS,  RGB_VAD,  RGB_VAI,
+              KC_GRAVE, KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS, KC_EQUAL,
+    KC_NLCK,  KC_TRNS,  KC_TRNS,  KC_UP,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_LBRC,  KC_RBRC,  KC_BSLS, 
+    KC_HOME,  KC_TRNS,  KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
+    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
+    KC_END,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_PSCR
+  )
 };
 
 void encoder_update_user(uint8_t index, bool clockwise) {
