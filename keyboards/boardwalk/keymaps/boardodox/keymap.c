@@ -50,16 +50,16 @@ enum layer_names {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-/* Keymap 0: Colemak Matrix Dh-m
+/* Keymap 0: Colemak Matrix
  *
  * ,-----------------------------------------------------------------------------------------------------.
  * |   =    |   1  |   2  |   3  |   4  |   5  | [ {  |  } ] |   6  |   7  |   8  |   9  |   0  |   -    |
  * |--------+------+------+------+------+-------------|------+------+------+------+------+------+--------|
- * | Delete |   Q  |   W  |   F  |   P  |   B  | SYMB | SYMB |   J  |   L  |   U  |   Y  |   ;  |   \    |
+ * | Delete |   Q  |   W  |   F  |   P  |   G  | SYMB | SYMB |   J  |   L  |   U  |   Y  |   ;  |   \    |
  * |--------+------+------+------+------+------|      |      |------+------+------+------+------+--------|
- * | BkSp   |A/MDIA|   R  |   S  |   T  |   G  |------|------|   M  |   N  |   E  |   I  |O/MDIA|' / GUI |
+ * | BkSp   |A/MDIA|   R  |   S  |   T  |   D  |------|------|   M  |   N  |   E  |   I  |O/MDIA|' / GUI |
  * |--------+------+------+------+------+------| Hyper| Meh  |------+------+------+------+------+--------|
- * | LShift |Z/Ctrl|   X  |   C  |   D  |   V  |      |      |   K  |   H  |   ,  |   .  |//Ctrl| RShift |
+ * | LShift |Z/Ctrl|   X  |   C  |   V  |   B  |      |      |   K  |   H  |   ,  |   .  |//Ctrl| RShift |
  * |--------+------+------+------+------+-------------'-------------+------+------+------+------+--------|
  * |Grv/SYMB| ESC  | MDIA | Alt  | Tab  | Space/MEDIA |    Space    | Left | Down | Up   | Right| ~SYMB  |
  * `-----------------------------------------------------------------------------------------------------'
@@ -67,10 +67,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [COMK] = LAYOUT_ortho_5x14(
 // [BASE] = LAYOUT_full_ergo(
   KC_EQL,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_LBRC, KC_RBRC, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
-  KC_DEL,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,    _SY_MO,  _SY_MO,  KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSLS,
-  KC_BSPC, _MD_A,   KC_R,    KC_S,    KC_T,    KC_G,    XXXXXXX, XXXXXXX, KC_M,    KC_N,    KC_E,    KC_I,    _MD_O,   _WN_QOT,
-  KC_LSFT, _CTL_Z,  KC_X,    KC_C,    KC_D,    KC_V,    _META,   _MEH,    KC_K,    KC_H,    KC_COMM, KC_DOT,  _CTL_SL, _RSH_EN,
-  _SY_GRV, KC_ESC,  _MD_MO,  KC_LALT, KC_TAB,  _MD_SPC,  XXXXXXX, KC_SPC,  XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _TAP_SY
+  KC_DEL,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    _SY_MO,  _SY_MO,  KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSLS,
+  KC_BSPC, _MD_A,   KC_R,    KC_S,    KC_T,    KC_D,    XXXXXXX, XXXXXXX, KC_H,    KC_N,    KC_E,    KC_I,    _MD_O,   _WN_QOT,
+  KC_LSFT, _CTL_Z,  KC_X,    KC_C,    KC_V,    KC_B,    _META,   _MEH,    KC_K,    KC_M,    KC_COMM, KC_DOT,  _CTL_SL, _RSH_EN,
+  _SY_GRV, KC_ESC,  _MD_MO,  KC_LALT, KC_TAB,  _MD_SPC, XXXXXXX, KC_SPC,  XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _TAP_SY
 ),
 
 
